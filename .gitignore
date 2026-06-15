@@ -1,0 +1,23 @@
+# Brainstorm scratch (visual companion mockups)
+.superpowers/
+
+# Claude workflow scratch
+.claude/workflows/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Node / React / Convex (incoming)
+node_modules/
+dist/
+build/
+.convex/
+.env
+.env.local
+*.local
+
+# OS
+.DS_Store
