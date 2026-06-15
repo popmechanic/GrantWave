@@ -10,6 +10,8 @@
 
 **This is plan 1 of 6.** Phases 2–6 (Discover, Shortlist & notes, Applications, Export, Admin) get their own plans after this lands.
 
+**Acceptance:** waived — Phase 1 is foundation/scaffolding; verification is the in-plan TDD suite (schema round-trip, auth boundary, design render, nav) plus the Task 6 gate (typecheck + full test run + lint). A held-out exam authored from the full app spec cannot pass on infrastructure-only Phase 1; sealing begins at Phase 2 (Discover), where user-facing behavior exists for an independent exam to verify. Operator chose this disposition 2026-06-15.
+
 ---
 
 ## File structure (locked here)
@@ -375,4 +377,4 @@ Verification only — writes nothing.
 
 **Marker review:** Every task has an explicit `Type`. Cross-task needs are `Depends-on` lines (5 → 2,3,4; 6 → all). The shared-file edit to `convex/schema.ts` (Tasks 2 and 3) carries a self-contained merge note in Task 3's body. The credentialed setup is isolated as `manual` Task 1.
 
-**Acceptance:** to be sealed after operator approval (held-out exam authored from the spec by an independent agent), per ultraplan.
+Acceptance disposition: waived for Phase 1 (the canonical `**Acceptance:**` line is in the header block, with the operator-chosen reason). Sealing begins at Phase 2.
