@@ -39,6 +39,8 @@ function CommentForm({ shortlistItemId }: { shortlistItemId: Id<"shortlistItems"
 export function Shortlist() {
   const items = useQuery(api.shortlist.listShortlist);
   const unsave = useMutation(api.shortlist.unsave);
+  const start = useMutation(api.applications.start);
+  const applied = new Set<string>(useQuery(api.applications.appliedShortlistIds) ?? []);
 
   return (
     <div>
@@ -70,13 +72,28 @@ export function Shortlist() {
           >
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "var(--space-3)" }}>
               <h3 style={{ fontFamily: "var(--font-serif-display)", fontSize: "var(--text-display-sm)", margin: "0 0 var(--space-1)" }}>{it.title}</h3>
-              <button
-                type="button"
-                onClick={() => void unsave({ shortlistItemId: it.id })}
-                style={{ fontSize: "var(--text-xs)", color: "var(--text-muted)", background: "transparent", border: "var(--border-hair) solid var(--border-default)", borderRadius: "var(--radius-pill)", padding: "var(--space-1) var(--space-3)", cursor: "pointer", whiteSpace: "nowrap" }}
-              >
-                Remove
-              </button>
+              <div style={{ display: "flex", gap: "var(--space-2)", flexShrink: 0 }}>
+                {applied.has(it.id) ? (
+                  <span style={{ fontSize: "var(--text-xs)", color: "var(--text-fact)", border: "var(--border-hair) solid var(--border-fact)", borderRadius: "var(--radius-pill)", padding: "var(--space-1) var(--space-3)", whiteSpace: "nowrap" }}>
+                    In Applications
+                  </span>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => void start({ shortlistItemId: it.id })}
+                    style={{ fontSize: "var(--text-xs)", fontWeight: "var(--weight-semibold)", color: "#fff", background: "var(--accent-fact)", border: 0, borderRadius: "var(--radius-pill)", padding: "var(--space-1) var(--space-3)", cursor: "pointer", whiteSpace: "nowrap" }}
+                  >
+                    Start application
+                  </button>
+                )}
+                <button
+                  type="button"
+                  onClick={() => void unsave({ shortlistItemId: it.id })}
+                  style={{ fontSize: "var(--text-xs)", color: "var(--text-muted)", background: "transparent", border: "var(--border-hair) solid var(--border-default)", borderRadius: "var(--radius-pill)", padding: "var(--space-1) var(--space-3)", cursor: "pointer", whiteSpace: "nowrap" }}
+                >
+                  Remove
+                </button>
+              </div>
             </div>
             {it.subtitle && (
               <p style={{ margin: "0 0 var(--space-1)", fontSize: "var(--text-sm)", color: "var(--text-muted)" }}>{it.subtitle}</p>
