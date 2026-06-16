@@ -1,11 +1,16 @@
 import { render, screen } from "@testing-library/react";
 import { expect, test, vi } from "vitest";
 
-// Stub Convex's useQuery so Discover renders sample results without a backend.
+// Stub Convex hooks so Discover renders sample results without a backend.
+// listResults is called with an args object; savedRefs is called with none.
 vi.mock("convex/react", () => ({
-  useQuery: () => [
-    { id: "1", kind: "opportunity", lane: "federal", tier: "fact", title: "NEA Grants for Arts Projects", agency: "NEA", aln: "45.024", status: "posted", closesSoon: false, relevant: true },
-  ],
+  useQuery: (_fn: unknown, args?: unknown) =>
+    args !== undefined
+      ? [
+          { id: "1", kind: "opportunity", lane: "federal", tier: "fact", title: "NEA Grants for Arts Projects", agency: "NEA", aln: "45.024", status: "posted", closesSoon: false, relevant: true },
+        ]
+      : [],
+  useMutation: () => async () => {},
 }));
 
 import { Discover } from "./Discover";

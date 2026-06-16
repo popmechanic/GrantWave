@@ -5,6 +5,7 @@ import { api } from "../../convex/_generated/api";
 import { Masthead } from "../design/components/brand/Masthead";
 import { Nav, type Tab } from "./Nav";
 import { Discover } from "../discover/Discover";
+import { Shortlist } from "../shortlist/Shortlist";
 import logo from "../design/assets/kmun-logo-ink.png";
 
 // Placeholder bodies. Later phases replace each tab with its real screen.
@@ -61,6 +62,8 @@ export function AppShell() {
       >
         {tab === "discover" ? (
           <Discover />
+        ) : tab === "shortlist" ? (
+          <Shortlist />
         ) : (
           <p style={{ color: "var(--text-muted)", fontSize: "var(--text-lg)" }}>
             {TAB_BLURB[tab]}

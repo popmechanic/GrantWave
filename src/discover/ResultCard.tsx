@@ -29,7 +29,15 @@ function metaLine(item: ResultItem): string {
 
 // One result. Its border encodes trust before you read a word: solid teal = Fact,
 // dashed amber = Worth a look. A vermillion "Closes soon" marker layers on top.
-export function ResultCard({ item }: { item: ResultItem }) {
+export function ResultCard({
+  item,
+  saved = false,
+  onSave,
+}: {
+  item: ResultItem;
+  saved?: boolean;
+  onSave?: () => void;
+}) {
   const isFact = item.tier === "fact";
   const tag = TAG[item.tier] ?? TAG.assumption;
   const meta = metaLine(item);
@@ -73,14 +81,20 @@ export function ResultCard({ item }: { item: ResultItem }) {
       )}
 
       <div style={{ display: "flex", gap: "var(--space-2)" }}>
-        <button
-          type="button"
-          disabled
-          title="Saving arrives in the next phase"
-          style={{ fontSize: "var(--text-sm)", fontWeight: "var(--weight-semibold)", color: "var(--text-faint)", background: "var(--color-bg-sunk)", border: "var(--border-hair) solid var(--border-default)", borderRadius: "var(--radius-md)", padding: "var(--space-2) var(--space-4)", cursor: "not-allowed" }}
-        >
-          ＋ Save to shortlist
-        </button>
+        {saved ? (
+          <span style={{ display: "inline-flex", alignItems: "center", fontSize: "var(--text-sm)", fontWeight: "var(--weight-semibold)", color: "var(--text-fact)", background: "var(--surface-fact)", border: "var(--border-hair) solid var(--border-fact)", borderRadius: "var(--radius-md)", padding: "var(--space-2) var(--space-4)" }}>
+            ✓ Saved
+          </span>
+        ) : (
+          <button
+            type="button"
+            onClick={onSave}
+            disabled={!onSave}
+            style={{ fontSize: "var(--text-sm)", fontWeight: "var(--weight-semibold)", color: "#fff", background: "var(--accent-fact)", border: "var(--border-thin) solid var(--accent-fact)", borderRadius: "var(--radius-md)", padding: "var(--space-2) var(--space-4)", cursor: onSave ? "pointer" : "not-allowed" }}
+          >
+            ＋ Save to shortlist
+          </button>
+        )}
         {item.url && (
           <a href={item.url} target="_blank" rel="noreferrer" style={{ fontSize: "var(--text-sm)", fontWeight: "var(--weight-semibold)", color: "var(--text-fact)", background: "transparent", border: "var(--border-hair) solid var(--border-fact)", borderRadius: "var(--radius-md)", padding: "var(--space-2) var(--space-4)", textDecoration: "none" }}>
             Open ↗

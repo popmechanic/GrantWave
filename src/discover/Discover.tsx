@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useQuery } from "convex/react";
+import { useQuery, useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { ResultCard } from "./ResultCard";
 import { Legend } from "./Legend";
@@ -21,6 +21,8 @@ export function Discover() {
     q: q.trim() || undefined,
     openNow,
   });
+  const savedSet = new Set(useQuery(api.shortlist.savedRefs) ?? []);
+  const save = useMutation(api.shortlist.save);
 
   return (
     <div>
@@ -76,7 +78,15 @@ export function Discover() {
       {results && results.length === 0 && (
         <p style={{ color: "var(--text-muted)" }}>No matches — try a different lane or clear the search.</p>
       )}
-      {results && results.map((item) => <ResultCard key={item.id} item={item} />)}
+      {results &&
+        results.map((item) => (
+          <ResultCard
+            key={item.id}
+            item={item}
+            saved={savedSet.has(item.id)}
+            onSave={() => void save({ itemType: item.kind, refId: item.id })}
+          />
+        ))}
     </div>
   );
 }
