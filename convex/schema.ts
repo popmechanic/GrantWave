@@ -1,4 +1,5 @@
 import { defineSchema, defineTable } from "convex/server";
+import { authTables } from "@convex-dev/auth/server";
 import { v } from "convex/values";
 
 // Every discovered item is tagged with how much to trust it. This union is the
@@ -10,11 +11,26 @@ const classification = v.union(
 );
 
 export default defineSchema({
+  // Convex Auth tables (authSessions, authAccounts, …). The users table below
+  // overrides authTables.users to add our custom fields.
+  ...authTables,
   users: defineTable({
-    username: v.string(),
-    displayName: v.string(),
-    role: v.union(v.literal("member"), v.literal("admin")),
-  }).index("by_username", ["username"]),
+    // Base fields managed by Convex Auth (kept verbatim from authTables.users).
+    name: v.optional(v.string()),
+    image: v.optional(v.string()),
+    email: v.optional(v.string()),
+    emailVerificationTime: v.optional(v.number()),
+    phone: v.optional(v.string()),
+    phoneVerificationTime: v.optional(v.number()),
+    isAnonymous: v.optional(v.boolean()),
+    // Our additions.
+    username: v.optional(v.string()),
+    displayName: v.optional(v.string()),
+    role: v.optional(v.union(v.literal("member"), v.literal("admin"))),
+  })
+    .index("email", ["email"])
+    .index("phone", ["phone"])
+    .index("by_username", ["username"]),
 
   // Federal openings from Grants.gov — mostly Facts (confirmed open).
   opportunities: defineTable({
