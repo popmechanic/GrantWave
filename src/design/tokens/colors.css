@@ -1,0 +1,80 @@
+/* ============================================================
+   KMUN — Color tokens
+   ------------------------------------------------------------
+   KMUN brand + Oregon-coast blend. Two-tier meaning system:
+   FACTS use calm teal/ink on paper; ASSUMPTIONS (interactive)
+   use amber on cream. Meaning is NEVER encoded in color alone —
+   pair every color cue with a border style, icon, or label.
+   All foreground/background pairs meet WCAG AA on paper.
+   ============================================================ */
+
+:root {
+  /* ---- Brand raw palette ---- */
+  --kmun-paper:        #FBF8EE; /* primary page background */
+  --kmun-ink:          #2D4A48; /* headlines / deep teal-charcoal */
+  --kmun-fact-teal:    #1E7A72; /* fact accent, solid borders */
+  --kmun-amber:        #C97F1B; /* assumption accent (text/border) */
+  --kmun-amber-surface:#FDF3DD; /* assumption surface (cream) */
+  --kmun-vermillion:   #D93B26; /* warning / alert */
+  --kmun-plum:         #3B1023; /* KMUX deep plum */
+  --kmun-cream:        #F3E7A6; /* hero butter cream */
+  --kmun-sand:         #D9CFA8; /* default borders / hairlines */
+
+  /* ---- Radio-wave stripe palette (retro multi-stripe accent) ---- */
+  --wave-plum:         #3B1023;
+  --wave-vermillion:   #D93B26;
+  --wave-orange:       #E8722C; /* burnt orange */
+  --wave-amber:        #F2A03D;
+  --wave-teal:         #1E7A72;
+
+  /* ---- Tints & supporting surfaces (derived, AA-checked) ---- */
+  --kmun-paper-2:      #F4EFDD; /* slightly recessed paper */
+  --kmun-teal-tint:    #E7F0EC; /* calm fact surface fill */
+  --kmun-teal-deep:    #15564F; /* hover/pressed teal */
+  --kmun-amber-deep:   #A2620F; /* hover/pressed amber, AA text on cream */
+  --kmun-vermillion-deep:#B22D1A;/* hover/pressed warning */
+  --kmun-verm-surface: #FBE6E1; /* warning surface fill */
+  --kmun-ink-soft:     #4E6B68; /* muted ink for secondary text (AA on paper) */
+  --kmun-ink-faint:    #6E8682; /* tertiary / captions (AA Large only) */
+
+  /* ============================================================
+     SEMANTIC ALIASES — prefer these in components
+     ============================================================ */
+
+  /* Page & surfaces */
+  --color-bg:              var(--kmun-paper);
+  --color-bg-sunk:         var(--kmun-paper-2);
+  --surface-card:          #FFFFFF;
+  --surface-fact:          var(--kmun-teal-tint);
+  --surface-assumption:    var(--kmun-amber-surface);
+  --surface-warning:       var(--kmun-verm-surface);
+  --surface-hero:          var(--kmun-cream);
+  --surface-invert:        var(--kmun-plum);
+
+  /* Text */
+  --text-heading:          var(--kmun-ink);
+  --text-body:             var(--kmun-ink);
+  --text-muted:            var(--kmun-ink-soft);
+  --text-faint:            var(--kmun-ink-faint);
+  --text-on-invert:        var(--kmun-paper);
+  --text-fact:             var(--kmun-fact-teal);
+  --text-assumption:       var(--kmun-amber-deep);
+  --text-warning:          var(--kmun-vermillion-deep);
+  --text-link:             var(--kmun-fact-teal);
+
+  /* Borders */
+  --border-default:        var(--kmun-sand);
+  --border-strong:         var(--kmun-ink);
+  --border-fact:           var(--kmun-fact-teal);
+  --border-assumption:     var(--kmun-amber);
+  --border-warning:        var(--kmun-vermillion);
+
+  /* Accents */
+  --accent-fact:           var(--kmun-fact-teal);
+  --accent-assumption:     var(--kmun-amber);
+  --accent-warning:        var(--kmun-vermillion);
+  --accent-hero:           var(--kmun-cream);
+
+  /* Focus ring (keyboard) */
+  --focus-ring:            var(--kmun-fact-teal);
+}

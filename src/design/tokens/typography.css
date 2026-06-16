@@ -1,0 +1,54 @@
+/* ============================================================
+   KMUN — Typography tokens
+   ------------------------------------------------------------
+   Display serif (Georgia/Gelasio) for headlines & big numbers
+   that carry warmth. Humanist sans (Source Sans 3) for body and
+   data. TABULAR numerals everywhere figures appear so columns of
+   money line up. Sizes run large — this content is screen-shared
+   on a video call to board members, some 65+. Nothing tiny.
+   ============================================================ */
+
+:root {
+  /* ---- Families ---- */
+  --font-serif-display: Georgia, 'Gelasio', 'Times New Roman', serif;
+  --font-sans: 'Source Sans 3', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-data: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+
+  /* Apply this to any element holding figures: aligns money columns */
+  --numeric-feature: "tnum" 1, "lnum" 1; /* @kind other */
+
+  /* ---- Weights ---- */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* ---- Type scale (px, generous for screen-share) ----
+     Display = serif; Text/Label = sans; Data = sans tabular */
+  --text-display-xl: 64px;  /* "The Ask" hero figure */
+  --text-display-lg: 48px;  /* page H1 / masthead title */
+  --text-display-md: 36px;  /* section headers, chapter titles */
+  --text-display-sm: 28px;  /* card stat headline (serif) */
+
+  --text-stat-xl: 52px;     /* big data number (sans tabular) */
+  --text-stat-lg: 40px;     /* stat card primary figure */
+  --text-stat-md: 30px;     /* secondary figure */
+
+  --text-xl: 24px;          /* lead paragraph / large body */
+  --text-lg: 20px;          /* body default on slides */
+  --text-md: 18px;          /* body / control text */
+  --text-sm: 16px;          /* secondary, captions on screen-share floor */
+  --text-xs: 14px;          /* footnote / citation (still ≥14) */
+  --text-eyebrow: 13px;     /* uppercase label / kicker */
+
+  /* ---- Line heights ---- */
+  --leading-tight: 1.1;     /* big display & numbers */
+  --leading-snug: 1.25;     /* headings */
+  --leading-normal: 1.5;    /* body */
+  --leading-relaxed: 1.65;  /* long-form story blocks */
+
+  /* ---- Letter spacing ---- */
+  --tracking-tight: -0.01em;
+  --tracking-normal: 0;
+  --tracking-eyebrow: 0.12em; /* uppercase kickers / breadcrumbs */
+}

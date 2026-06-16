@@ -1,0 +1,15 @@
+/* ============================================================
+   KMUN — Webfonts
+   ------------------------------------------------------------
+   Display serif: Georgia is the canonical KMUN headline face.
+   For cross-machine consistency we load Gelasio — a Google font
+   metrically compatible with Georgia — as the webfont carrier,
+   and keep Georgia first in the stack so machines that have it
+   use the genuine article.
+
+   Body / data sans: Source Sans 3 — a clean humanist sans with
+   true tabular figures (font-feature-settings "tnum"), used for
+   all body copy and every number in a chart or card.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Gelasio:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');

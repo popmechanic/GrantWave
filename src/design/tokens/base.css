@@ -1,0 +1,72 @@
+/* ============================================================
+   KMUN — Base layer
+   ------------------------------------------------------------
+   Page defaults + a few brand utilities used across components.
+   Kept tiny on purpose; tokens carry the system.
+   ============================================================ */
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--text-body);
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  line-height: var(--leading-normal);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Headlines default to the display serif */
+h1, h2, h3, h4 {
+  font-family: var(--font-serif-display);
+  color: var(--text-heading);
+  line-height: var(--leading-snug);
+  margin: 0 0 var(--space-4);
+  font-weight: var(--weight-bold);
+}
+
+/* Every figure: tabular, lining numerals so money columns align */
+.kmun-num,
+[data-numeric] {
+  font-feature-settings: var(--numeric-feature);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* Uppercase kicker / eyebrow label */
+.kmun-eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--text-eyebrow);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ---- Radio-wave stripe band (masthead / footer accent) ----
+   Retro multi-stripe. Use as a thin horizontal rule. The pattern
+   is plum · vermillion · burnt-orange · amber · teal repeating. */
+.kmun-wave-band {
+  height: var(--wave-band);
+  width: 100%;
+  border: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--wave-plum)       0,   var(--wave-plum)       40px,
+    var(--wave-vermillion) 40px, var(--wave-vermillion) 80px,
+    var(--wave-orange)     80px, var(--wave-orange)     120px,
+    var(--wave-amber)      120px, var(--wave-amber)     160px,
+    var(--wave-teal)       160px, var(--wave-teal)      200px
+  );
+}
+
+/* Keyboard focus — visible teal ring everywhere */
+:where(a, button, input, select, [tabindex]):focus-visible {
+  outline: var(--focus-width) solid var(--focus-ring);
+  outline-offset: var(--focus-offset);
+  border-radius: var(--radius-sm);
+}
+
+/* Print: force white background, keep borders legible */
+@media print {
+  body { background: #fff; }
+}

@@ -1,0 +1,51 @@
+<!-- @dsCard group="Components" viewport="700x420" name="Content & Citations" subtitle="Story/callout blocks, citation footnotes & chart legend chips" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="../../styles.css" />
+<style>
+  body { padding: 28px; }
+  .stack { display: flex; flex-direction: column; gap: 20px; max-width: 640px; }
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .foot { border-top: 1px solid var(--border-default); display: flex; flex-direction: column; gap: 4px; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { StoryBlock, Citation, CitationMark, LegendChip } = window.KMUNDesignSystem_4ae2e2;
+  function Demo() {
+    return (
+      <div className="stack">
+        <StoryBlock tone="fact" eyebrow="What this means" title="A living wage, finally">
+          At 40 hours, Maria earns <strong>$48,200</strong> — the first time this role has
+          cleared a living wage for Clatsop County<CitationMark n={1} />.
+        </StoryBlock>
+        <StoryBlock tone="assumption" eyebrow="Our planning estimate">
+          We model donations growing <strong>4% a year</strong>. Slide it lower if you'd rather
+          plan conservatively — nothing here is a promise.
+        </StoryBlock>
+        <div className="chips">
+          <LegendChip label="Actual" color="var(--accent-fact)" sample="line" />
+          <LegendChip label="Projected" color="var(--accent-assumption)" sample="dashed" />
+          <LegendChip label="Market range" color="var(--accent-fact)" sample="band" />
+        </div>
+        <div className="foot">
+          <Citation n={1} source="MIT Living Wage Calculator, Clatsop County OR, 2024"
+            href="https://livingwage.mit.edu" retrieved="May 2026" />
+          <Citation n={2} source="IRS Form 990, Tillicum Foundation, FY2024, line 9"
+            href="https://projects.propublica.org/nonprofits" />
+        </div>
+      </div>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script>
+</body>
+</html>
