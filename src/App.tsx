@@ -1,10 +1,22 @@
-// Placeholder app shell. Phase 1 (Foundation) replaces this with the real
-// Authenticated/Unauthenticated gate, masthead, and four-tab navigation.
+import { Authenticated, Unauthenticated, AuthLoading } from "convex/react";
+import { AppShell } from "./shell/AppShell";
+import { SignIn } from "./shell/SignIn";
+
+// Signed-out visitors get the sign-in gate; signed-in users get the app shell.
 export default function App() {
   return (
-    <main style={{ fontFamily: "system-ui", padding: "2rem" }}>
-      <h1>KMUN Grant Finder</h1>
-      <p>Scaffold ready. The signed-in app shell arrives in the Foundation phase.</p>
-    </main>
+    <>
+      <AuthLoading>
+        <div style={{ padding: "var(--space-8)", color: "var(--text-muted)" }}>
+          Loading…
+        </div>
+      </AuthLoading>
+      <Unauthenticated>
+        <SignIn />
+      </Unauthenticated>
+      <Authenticated>
+        <AppShell />
+      </Authenticated>
+    </>
   );
 }

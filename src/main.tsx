@@ -1,12 +1,16 @@
-// Placeholder entry point. Phase 1 (Foundation) wraps <App/> in
-// ConvexAuthProvider with a ConvexReactClient(import.meta.env.VITE_CONVEX_URL)
-// and imports the KMUN design system stylesheet.
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { ConvexAuthProvider } from "@convex-dev/auth/react";
+import { ConvexReactClient } from "convex/react";
 import App from "./App";
+import "./design/styles.css";
+
+const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL as string);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <App />
+    <ConvexAuthProvider client={convex}>
+      <App />
+    </ConvexAuthProvider>
   </StrictMode>,
 );
