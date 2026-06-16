@@ -4,6 +4,7 @@ import { useAuthActions } from "@convex-dev/auth/react";
 import { api } from "../../convex/_generated/api";
 import { Masthead } from "../design/components/brand/Masthead";
 import { Nav, type Tab } from "./Nav";
+import { Discover } from "../discover/Discover";
 import logo from "../design/assets/kmun-logo-ink.png";
 
 // Placeholder bodies. Later phases replace each tab with its real screen.
@@ -58,9 +59,13 @@ export function AppShell() {
           padding: "var(--space-12) var(--space-8)",
         }}
       >
-        <p style={{ color: "var(--text-muted)", fontSize: "var(--text-lg)" }}>
-          {TAB_BLURB[tab]}
-        </p>
+        {tab === "discover" ? (
+          <Discover />
+        ) : (
+          <p style={{ color: "var(--text-muted)", fontSize: "var(--text-lg)" }}>
+            {TAB_BLURB[tab]}
+          </p>
+        )}
       </main>
     </div>
   );
