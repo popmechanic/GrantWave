@@ -9,7 +9,15 @@
  */
 
 import type * as auth from "../auth.js";
+import type * as crons from "../crons.js";
+import type * as discover from "../discover.js";
 import type * as http from "../http.js";
+import type * as lib_classify from "../lib/classify.js";
+import type * as refresh from "../refresh.js";
+import type * as sources_grantsGov from "../sources/grantsGov.js";
+import type * as sources_propublica from "../sources/propublica.js";
+import type * as sources_types from "../sources/types.js";
+import type * as sources_usaspending from "../sources/usaspending.js";
 import type * as users from "../users.js";
 
 import type {
@@ -20,7 +28,15 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   auth: typeof auth;
+  crons: typeof crons;
+  discover: typeof discover;
   http: typeof http;
+  "lib/classify": typeof lib_classify;
+  refresh: typeof refresh;
+  "sources/grantsGov": typeof sources_grantsGov;
+  "sources/propublica": typeof sources_propublica;
+  "sources/types": typeof sources_types;
+  "sources/usaspending": typeof sources_usaspending;
   users: typeof users;
 }>;
 

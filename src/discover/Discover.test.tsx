@@ -4,7 +4,7 @@ import { expect, test, vi } from "vitest";
 // Stub Convex's useQuery so Discover renders sample results without a backend.
 vi.mock("convex/react", () => ({
   useQuery: () => [
-    { id: "1", kind: "opportunity", lane: "federal", tier: "fact", title: "NEA Grants for Arts Projects", agency: "NEA", aln: "45.024", status: "posted", closesSoon: false },
+    { id: "1", kind: "opportunity", lane: "federal", tier: "fact", title: "NEA Grants for Arts Projects", agency: "NEA", aln: "45.024", status: "posted", closesSoon: false, relevant: true },
   ],
 }));
 

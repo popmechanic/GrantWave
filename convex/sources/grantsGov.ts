@@ -53,7 +53,7 @@ async function searchOne(body: Record<string, unknown>): Promise<NormalizedOppor
 // Live fetch: a keyword sweep (501(c)(3)-eligible) plus an ALN-precision sweep,
 // de-duplicated by opportunity URL.
 export async function fetchGrantsGov(
-  keywords: string[] = ["public radio", "community media", "public telecommunications"],
+  keywords: string[] = ["public radio", "community radio", "public broadcasting", "public media"],
 ): Promise<NormalizedOpportunity[]> {
   const byKey = new Map<string, NormalizedOpportunity>();
   for (const kw of keywords) {

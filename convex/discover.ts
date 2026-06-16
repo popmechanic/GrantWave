@@ -2,7 +2,19 @@ import { v } from "convex/values";
 import { query } from "./_generated/server";
 import { getAuthUserId } from "@convex-dev/auth/server";
 import { closesSoon } from "./lib/classify";
+import { KNOWN_RELEVANT_ALNS } from "./sources/grantsGov";
 import type { Doc } from "./_generated/dataModel";
+
+// A federal opening is high-relevance if it's under a targeted ALN or its text
+// names media/radio/arts/humanities — used to float real hits above keyword noise.
+const RELEVANT_ALNS = new Set(KNOWN_RELEVANT_ALNS);
+const RELEVANT_TERMS =
+  /radio|media|broadcast|telecommunication|journalism|public media|humanities|\barts\b|digital equity|documentary/i;
+
+function isRelevantOpportunity(o: Doc<"opportunities">): boolean {
+  if (o.aln && RELEVANT_ALNS.has(o.aln)) return true;
+  return RELEVANT_TERMS.test(`${o.title} ${o.agency}`);
+}
 
 // A unified result row the Discover screen renders, regardless of source lane.
 export type ResultItem = {
@@ -16,6 +28,7 @@ export type ResultItem = {
   status?: string;
   closeDate?: string;
   closesSoon: boolean;
+  relevant: boolean;
   url?: string;
   location?: string;
   nteeCode?: string;
@@ -34,6 +47,7 @@ export function oppToItem(o: Doc<"opportunities">, now: number): ResultItem {
     status: o.status,
     closeDate: o.closeDate,
     closesSoon: closesSoon(o.closeDate, now),
+    relevant: isRelevantOpportunity(o),
     url: o.url,
   };
 }
@@ -47,6 +61,7 @@ export function funderToItem(f: Doc<"funders">): ResultItem {
     tier: f.classification,
     title: f.name,
     closesSoon: false,
+    relevant: true,
     location: location || undefined,
     nteeCode: f.nteeCode,
     evidence: f.evidence,
@@ -80,6 +95,7 @@ export function filterSort(
         .includes(needle),
     );
   return [...out].sort((a, b) => {
+    if (a.relevant !== b.relevant) return a.relevant ? -1 : 1;
     if (a.closesSoon !== b.closesSoon) return a.closesSoon ? -1 : 1;
     if (a.lane !== b.lane) return (LANE_RANK[a.lane] ?? 9) - (LANE_RANK[b.lane] ?? 9);
     return a.title.localeCompare(b.title);
